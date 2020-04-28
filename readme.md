@@ -1,14 +1,12 @@
-#statics server
----------------
+# statics server
 
 This program serves files from the location it is run.
 
-Going to http://localhost:3000/ will give you an index of the files.
+Going to http://localhost:80/ will give you an index of the files.
 
 Ideal for local webdevelopment.
 
 ## commandline arguments
----------------
 
 **-dir** can be used to specify a specific directory, absolute or relative. By default content is served from where the program is executed.
 
