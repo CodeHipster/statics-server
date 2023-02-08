@@ -11,7 +11,9 @@ import (
 
 func main() {
 
-	directoryPtr := flag.String("dir", "./", "Directory (relative to the binary) to serve static content from. By default serves from where the application is started.")
+	directoryPtr := flag.String("dir", "."+string(os.PathSeparator),
+		`Directory (relative to the binary) to serve static content from. 
+		By default serves from where the application is started.`)
 	numbPtr := flag.Int("port", 80, "Port to use, ")
 	flag.Parse()
 
@@ -27,19 +29,11 @@ func main() {
 	}
 }
 
-func getDirectory(argument string) string {
-	directory := argument
-	if !filepath.IsAbs(directory) {
-		ex, err := os.Executable()
-		if err != nil {
-			panic(err)
-		}
-		exPath := filepath.Dir(ex)
-		dir, err := filepath.Abs(exPath + argument)
-		if err != nil {
-			panic(err)
-		}
-		return dir
+func getDirectory(directory string) string {
+	//Abs will join path with working directory if it is not absolute.
+	dir, err := filepath.Abs(directory)
+	if err != nil {
+		panic(err)
 	}
-	return directory
+	return dir
 }
